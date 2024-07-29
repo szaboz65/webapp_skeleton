@@ -1,0 +1,79 @@
+{
+    "name": "z65/webapp-skeleton",
+    "type": "project",
+    "description": "A webapp skeleton with W2UI framework and REST API backend with Slim4",
+    "keywords": [
+        "webapp",
+        "w2ui",
+        "slim-framework",
+        "skeleton",
+        "slim",
+        "slim4"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.4 || ^8.0",
+        "ext-json": "*",
+        "ext-pdo": "*",
+        "cakephp/chronos": "^2",
+        "cakephp/database": "^4",
+        "cakephp/validation": "^4.2",
+        "fig/http-message-util": "^1.1",
+        "globalcitizen/php-iban": "v4.2.1",
+        "monolog/monolog": "^2",
+        "nyholm/psr7": "^1.4",
+        "nyholm/psr7-server": "^1.0",
+        "php-di/php-di": "^6",
+        "phpmailer/phpmailer": "v6.6.5",
+        "selective/array-reader": "^1.1",
+        "selective/basepath": "^2",
+        "slim/slim": "^4",
+        "symfony/cache": "^5.3",
+        "symfony/console": "^5",
+        "symfony/polyfill-uuid": "^1.22",
+        "symfony/yaml": "^5.2"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3",
+        "mikey179/vfsstream": "^1.6",
+        "overtrue/phplint": "^3",
+        "phpstan/phpstan": "1.*",
+        "phpunit/phpunit": "^8 || ^9",
+        "selective/test-traits": "^2",
+        "squizlabs/php_codesniffer": "^3",
+        "symfony/filesystem": "^5",
+        "symfony/finder": "^5"
+    },
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "App\\Test\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test:all": [
+            "@lint",
+            "@cs:check",
+            "@sniffer:check",
+            "@stan",
+            "@test"
+        ],
+        "cs:check": "php-cs-fixer fix --dry-run --format=txt --verbose --diff --config=.cs.php --ansi",
+        "cs:fix": "php-cs-fixer fix --config=.cs.php --ansi --verbose",
+        "lint": "phplint ./ --exclude=vendor --no-interaction --no-cache --ansi",
+        "stan": "phpstan analyse -c phpstan.neon --no-progress --ansi",
+        "sniffer:check": "phpcs --standard=phpcs.xml",
+        "sniffer:fix": "phpcbf --standard=phpcs.xml",
+        "test": "phpunit --configuration phpunit.xml --do-not-cache-result --colors=always",
+        "test:coverage": "php -d xdebug.mode=coverage -r \"require 'vendor/bin/phpunit';\" -- --configuration phpunit.xml --do-not-cache-result --colors=always --coverage-clover build/logs/clover.xml --coverage-html build/coverage",
+        "schema:dump": "php bin/console.php schema-dump --ansi"
+    }
+}
